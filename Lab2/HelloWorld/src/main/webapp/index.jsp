@@ -8,6 +8,7 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="${pageContext.request.contextPath}/InputGraphPage">graph input </a>
+<a href="${pageContext.request.contextPath}/input.jsp">graph file input </a>
+
 </body>
 </html>

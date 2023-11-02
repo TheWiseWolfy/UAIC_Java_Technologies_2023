@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Student Management</title>
+</h:head>
+
+<h:body>
+    <h2>Student List</h2>
+    <h:dataTable value="#{studentListBean.students}" var="student">
+        <h:column>
+            <f:facet name="header">Student ID</f:facet>
+            #{student.studentId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Student Name</f:facet>
+            #{student.studentName}
+        </h:column>
+    </h:dataTable>
+
+    <h2>Add Student</h2>
+    <h:form>
+        <h2>Add New Student</h2>
+
+        <h:outputLabel for="studentName" value="Student Name:" />
+        <h:inputText id="studentName" value="#{studentListBean.newStudent.studentName}" required="true" />
+        <h:message for="studentName" style="color: red" />
+        <h:commandButton value="Add Student" action="#{studentListBean.addStudent}" />
+    </h:form>
+
+
+    <h2>Project List</h2>
+    <h:dataTable value="#{projectListBean.projects}" var="project">
+        <h:column>
+            <f:facet name="header">Project ID</f:facet>
+            #{project.projectId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Project Name</f:facet>
+            #{project.projectName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Project Description</f:facet>
+            #{project.projectDescription}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Project Category</f:facet>
+            #{project.projectCategory}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Project Deadline</f:facet>
+            #{project.projectDeadline}
+        </h:column>
+    </h:dataTable>
+
+</h:body>
+</html>

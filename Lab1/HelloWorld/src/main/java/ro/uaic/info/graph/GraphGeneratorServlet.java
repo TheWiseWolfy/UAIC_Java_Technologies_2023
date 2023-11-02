@@ -1,6 +1,7 @@
 package ro.uaic.info.graph;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Random;
 
 import jakarta.servlet.annotation.WebServlet;
@@ -51,6 +52,7 @@ public class GraphGeneratorServlet  extends HttpServlet{
         int[][] adjacencyMatrix = new int[numVertices][numVertices];
         Random random = new Random();
 
+       // Arrays.fill(adjacencyMatrix, 0);
         // Initialize the adjacency matrix
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {

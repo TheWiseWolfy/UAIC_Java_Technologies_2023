@@ -12,3 +12,9 @@
 
 -input.jsp & result.jsp
 -UploadServlet
+
+**Laborator 2**
+
+-A relational database
+-A web page for viewing the projects
+-started datatable

@@ -6,12 +6,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 
-import jakarta.annotation.Resource;
-import jakarta.inject.Inject;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ArrayList;
 
 public class DatabaseManager {
@@ -46,35 +43,13 @@ public class DatabaseManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle any exceptions or errors here
         }
         return "Project insertion failed.";
     }
 
-    public String insertStudent(String studentName) {
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "INSERT INTO public.student (student_name) VALUES (?)";
-
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, studentName);
-
-                int rowCount = preparedStatement.executeUpdate();
-
-                if (rowCount > 0) {
-                    return "Student inserted successfully.";
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle any exceptions or errors here
-        }
-        return "Student insertion failed.";
-    }
-
-
     // Method to retrieve all projects from the database
-    public List<Project> getAllProjects() {
-        List<Project> projects = new ArrayList<>();
+    public ArrayList<Project> getAllProjects() {
+        ArrayList<Project> projects = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT project_id,project_name, project_description, project_category, project_deadline FROM public.project";
@@ -100,8 +75,51 @@ public class DatabaseManager {
         return projects;
     }
 
-    public List<Student> getAllStudents() {
-        List<Student> students = new ArrayList<>();
+    //_______________________________________STUDENTS___________________________________
+    public String insertStudent(String studentName) {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "INSERT INTO public.student (student_name) VALUES (?)";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, studentName);
+
+                int rowCount = preparedStatement.executeUpdate();
+
+                if (rowCount > 0) {
+                    return "Student inserted successfully.";
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle any exceptions or errors here
+        }
+        return "Student insertion failed.";
+    }
+
+    public String deleteStudent(int studentId) {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "DELETE FROM public.student WHERE student_id = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, studentId);
+
+                int rowCount = preparedStatement.executeUpdate();
+
+                if (rowCount > 0) {
+                    return "Student deleted successfully.";
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle any exceptions or errors here
+        }
+        return "Student deletion failed.";
+    }
+
+
+
+    public ArrayList<Student> getAllStudents() {
+        ArrayList<Student> students = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT student_id, student_name FROM public.student";

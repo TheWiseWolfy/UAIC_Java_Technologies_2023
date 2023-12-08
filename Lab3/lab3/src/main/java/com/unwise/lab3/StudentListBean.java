@@ -2,12 +2,14 @@ package com.unwise.lab3;
 
 
 import jakarta.annotation.PostConstruct;
+import jakarta.el.MethodExpression;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,13 +20,25 @@ public class StudentListBean implements Serializable {
 
     private Student newStudent;
 
+    public Student getNewStudent() {
+        return newStudent;
+    }
+
+    public void setNewStudent(Student newStudent) {
+        this.newStudent = newStudent;
+    }
+
+    public StudentListBean() {
+        newStudent = new Student();
+    }
+
     // Getters and setters
-    public List<Student> getStudents() {
+    public ArrayList<Student> getStudents() {
 
         DatabaseManager db = new DatabaseManager();
 
         // Add more projects as needed.
-        logger.info("THE STUDENTS HAVE BEEN CREATED");
+        logger.info("THE STUDENTS HAVE BEEN LOADED");
 
         return db.getAllStudents();
     }
@@ -32,7 +46,8 @@ public class StudentListBean implements Serializable {
     public void addStudent() {
         DatabaseManager db = new DatabaseManager();
         String message = db.insertStudent(newStudent.getStudentName());
-        newStudent = new Student(1,"Wa"); // Clear the new student for the next addition
+
+        newStudent = new Student(); // Clear the new student for the next addition
 
         if (!message.isEmpty()) {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -40,11 +55,18 @@ public class StudentListBean implements Serializable {
         }
     }
 
-    public Student getNewStudent() {
-        return newStudent;
-    }
 
-    public void setNewStudent(Student newStudent) {
-        this.newStudent = newStudent;
+    public void deleteStudent(int studentId) {
+        // Delete the student based on the ID
+        DatabaseManager db = new DatabaseManager();
+        String message = db.deleteStudent(studentId);
+
+        // Update the student list after deletion
+        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("formName:objectId");
+
+        if (!message.isEmpty()) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+        }
     }
 }

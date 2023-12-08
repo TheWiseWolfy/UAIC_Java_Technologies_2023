@@ -1,59 +1,79 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Student Management</title>
 </h:head>
-
 <h:body>
-    <h2>Student List</h2>
-    <h:dataTable value="#{studentListBean.students}" var="student">
-        <h:column>
-            <f:facet name="header">Student ID</f:facet>
-            #{student.studentId}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Student Name</f:facet>
-            #{student.studentName}
-        </h:column>
-    </h:dataTable>
 
+    <h:button value="Go to Projects Page" outcome="projects" />
+
+    <p:outputPanel id="studentListPanel">
+        <h2>Student List</h2>
+        <p:dataTable value="#{studentListBean.students}" var="student">
+            <p:column headerText="Student ID">
+                #{student.studentId}
+            </p:column>
+            <p:column headerText="Student Name">
+                #{student.studentName}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Actions</f:facet>
+                <p:commandButton icon="pi pi-times" action="#{studentListBean.deleteStudent(student.studentId)}" update="studentListPanel" />
+            </p:column>
+
+        </p:dataTable>
+    </p:outputPanel>
     <h2>Add Student</h2>
     <h:form>
         <h2>Add New Student</h2>
-
-        <h:outputLabel for="studentName" value="Student Name:" />
-        <h:inputText id="studentName" value="#{studentListBean.newStudent.studentName}" required="true" />
-        <h:message for="studentName" style="color: red" />
-        <h:commandButton value="Add Student" action="#{studentListBean.addStudent}" />
+        <p:outputLabel for="studentName" value="Student Name:" />
+        <p:inputText id="studentName" value="#{studentListBean.newStudent.studentName}" required="true" />
+        <p:message for="studentName" style="color: red" />
+        <p:commandButton value="Add Student" action="#{studentListBean.addStudent}"  update="studentListPanel"  />
     </h:form>
 
+    <p:outputPanel id="projectListPanel">
+        <h2>Project List</h2>
+        <p:dataTable value="#{projectListBean.projects}" var="project">
+            <p:column headerText="Project ID">
+                #{project.projectId}
+            </p:column>
+            <p:column headerText="Project Name">
+                #{project.projectName}
+            </p:column>
+            <p:column headerText="Project Description">
+                #{project.projectDescription}
+            </p:column>
+            <p:column headerText="Project Category">
+                #{project.projectCategory}
+            </p:column>
+            <p:column headerText="Project Deadline">
+                #{project.projectDeadline}
+            </p:column>
+        </p:dataTable>
+    </p:outputPanel>
 
-    <h2>Project List</h2>
-    <h:dataTable value="#{projectListBean.projects}" var="project">
-        <h:column>
-            <f:facet name="header">Project ID</f:facet>
-            #{project.projectId}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Project Name</f:facet>
-            #{project.projectName}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Project Description</f:facet>
-            #{project.projectDescription}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Project Category</f:facet>
-            #{project.projectCategory}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Project Deadline</f:facet>
-            #{project.projectDeadline}
-        </h:column>
-    </h:dataTable>
+    <h2>Add Project</h2>
+    <h:form>
+        <h2>Add New Project</h2>
+
+        <p:outputLabel for="projectName" value="Project Name:" />
+        <p:inputText id="projectName" value="#{projectListBean.newProject.projectName}" required="true" />
+
+        <p:outputLabel for="projectDescription" value="Project Description:" />
+        <p:inputText id="projectDescription" value="#{projectListBean.newProject.projectDescription}" />
+
+        <p:outputLabel for="projectCategory" value="Project Category:" />
+        <p:inputText id="projectCategory" value="#{projectListBean.newProject.projectCategory}" />
+
+        <p:outputLabel for="projectDeadline" value="Project Deadline:" />
+        <p:calendar id="projectDeadline" value="#{projectListBean.newProject.projectDeadline}" required="true" />
+
+        <p:commandButton value="Add Project" action="#{projectListBean.addProject}" update="projectListPanel" />
+    </h:form>
 
 </h:body>
 </html>

@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.unwise</groupId>
-  <artifactId>lab3</artifactId>
+  <artifactId>lab4</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>lab3</name>
+  <name>lab4</name>
   <packaging>war</packaging>
 
   <properties>
@@ -19,7 +19,13 @@
 
   <dependencies>
 
-      <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+          <version>6.4.0.Final</version>
+          <type>pom</type>
+      </dependency>
+
       <dependency>
           <groupId>jakarta.platform</groupId>
           <artifactId>jakarta.jakartaee-api</artifactId>
@@ -40,6 +46,7 @@
           <version>${junit.version}</version>
           <scope>test</scope>
     </dependency>
+
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
@@ -50,6 +57,20 @@
           <groupId>org.postgresql</groupId>
           <artifactId>postgresql</artifactId>
           <version>42.6.0</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-api</artifactId>
+          <version>5.8.2</version>
+          <scope>test</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-engine</artifactId>
+          <version>5.8.2</version>
+          <scope>test</scope>
       </dependency>
 
   </dependencies>

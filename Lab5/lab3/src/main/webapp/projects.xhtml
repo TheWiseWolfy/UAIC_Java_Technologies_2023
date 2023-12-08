@@ -12,7 +12,7 @@
     <h:button value="Go to Manage Page" outcome="manage" />
 
         <h:form>
-            <p:dataTable var="project" value="#{projectListBean.projects}">
+            <p:dataTable var="project" value="#{ProjectRepository.projects}">
                 <p:column headerText="Project Name">
                     #{project.projectName}
                 </p:column>

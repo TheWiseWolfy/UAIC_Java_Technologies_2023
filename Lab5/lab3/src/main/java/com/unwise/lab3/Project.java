@@ -1,14 +1,31 @@
 package com.unwise.lab3;
 
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.sql.Date;
 
+@Entity
+@Table(name = "project") // Define the table name in the database
+@NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
 public class Project {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "project_id")
     private int projectId;
+
+    @Column(name = "project_name")
     private String projectName;
+
+    @Column(name = "project_description")
     private String projectDescription;
+
+    @Column(name = "project_category")
     private String projectCategory;
+
+    @Column(name = "project_deadline")
     private Date projectDeadline;
 
     // Constructors

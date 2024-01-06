@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence>
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+    <persistence-unit name="postgres" transaction-type="JTA">
+        <jta-data-source>postgres</jta-data-source>
+        <class>com.unwise.lab7.User</class>
+
+        <properties>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>

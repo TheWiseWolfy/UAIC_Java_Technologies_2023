@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>My Page with D3.js Graph</title>
+    <h:outputScript library="js" name="d3.v7.min.js"/>
+    <h:outputScript library="js" name="graph.js"/>
+
+</h:head>
+<h:body>
+    <h2>Welcome to My Web Page with  D3.js Graph</h2>
+
+    <div id="graph"></div>
+
+    <h:outputScript>
+        var edges = #{captchaGraphBean.edgesAsJson};
+        var path = #{captchaGraphBean.pathAsJson};
+        drawGraph(edges, path);
+    </h:outputScript>
+
+    <button id="submit-button">Submit</button>
+
+    <h1>Graph Edges</h1>
+    <ui:repeat value="#{captchaGraphBean.edgeProxies}" var="edge">
+        <h:outputText value="Node 1: #{edge.node1}, Node 2: #{edge.node2}"/>
+        <br/>
+    </ui:repeat>
+
+</h:body>
+</html>

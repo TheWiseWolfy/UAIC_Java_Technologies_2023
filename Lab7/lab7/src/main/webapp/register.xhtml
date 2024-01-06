@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Teacher Registration</title>
+</h:head>
+<h:body>
+    <h2>Teacher Registration</h2>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="username" value="Username:" />
+            <h:inputText id="username" value="#{registrationBean.user.username}" required="true" requiredMessage="Username is required"/>
+
+            <h:outputLabel for="password" value="Password:" />
+            <h:inputSecret id="password" value="#{registrationBean.user.password}" required="true" requiredMessage="Password is required"/>
+        </h:panelGrid>
+
+        <h:commandButton action="#{registrationBean.registerUser}" value="Register"/>
+    </h:form>
+</h:body>
+</html>

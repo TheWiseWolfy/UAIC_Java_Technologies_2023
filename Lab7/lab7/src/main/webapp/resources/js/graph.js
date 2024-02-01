@@ -112,14 +112,16 @@ function drawGraph(edges, path) {
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('submit-button').addEventListener('click', function() {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/endpoint', true);
+        xhr.open('POST', '/lab7-1.0-SNAPSHOT/graph-endpoint', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(selectedNodes));
 
         xhr.onload = function() {
             var status = xhr.status;
+
             if (status == 200) {
                 console.log("Submit successful.");
+                console.log("Response: " + xhr.responseText); //
             } else {
                 console.log("Submit failed.");
             }

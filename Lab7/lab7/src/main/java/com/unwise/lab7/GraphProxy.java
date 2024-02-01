@@ -16,10 +16,10 @@ import java.util.Random;
 
 public class GraphProxy implements Serializable {
 
+
     public class ProxyEdge implements Serializable {
         private int node1;
         private int node2;
-
 
         public ProxyEdge(int node1, int node2) {
             this.node1 = node1;
@@ -78,6 +78,7 @@ public class GraphProxy implements Serializable {
         } while (path == null);
         // Ensure that startNode and endNode are different
         // Ensure the existence of a path
+
     }
 
     public  List<ProxyEdge> getProxyEdges(){
